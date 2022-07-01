@@ -22,11 +22,6 @@ const io = new Server(server, {
       res.send(`Hola Mundo`)
     })
 
-    app.use("/send", (req,res)=>{
-      io.emit('chat', 'Sending message from server')
-      console.log("Sending msg from server")
-    })
-
     io.on("connection", (socket) => {
       console.log(`New connection: ${socket.id}`);
 
