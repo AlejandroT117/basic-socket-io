@@ -10,7 +10,8 @@ const server = http.createServer(app);
 const io = new Server(server, {
   // options
   cors: {
-    origin: ["http://localhost:3000", 'https://marvelous-glacier-bay-34525.herokuapp.com/'],
+    origin: ["http://localhost:3000", 'https://marvelous-glacier-bay-34525.herokuapp.com'],
+    methods: ["GET", "POST"]
   },
 });
 
