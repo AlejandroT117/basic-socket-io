@@ -21,7 +21,7 @@ const roomsList = [388, 152, 357, 206, 411, 439, 369, 339, 169];
     app.use(cors());
 
     app.use("/", (req, res) => {
-      res.send(`Hola Mundo`);
+      res.send(`Hola Mundo. Transmitiendo eventos a través de Socket IO cada 30 segundos`);
     });
     let reps = 15;
 
