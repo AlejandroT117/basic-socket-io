@@ -29,6 +29,7 @@ const roomsList = [388, 152, 357, 206, 411, 439, 369, 339, 169];
     io.on("connection", (socket) => {
       console.log(`New connection: ${socket.id}`);
 
+      //Emit fall risk each 30 sec
       setInterval(() => {
         let number = Math.floor(Math.random() * 3);
         let roomIndex = Math.floor(Math.random() * 9);
@@ -41,9 +42,17 @@ const roomsList = [388, 152, 357, 206, 411, 439, 369, 339, 169];
         console.log(`Chating: ${msg}`);
       });
 
-      socket.onAny((event, msg) => {
-        console.log(`Event: ${event} - Msg: ${msg}`);
-      });
+      //receive audio 
+      socket.on('audio', (obj)=>{
+        console.log(`Audio recibido`)
+
+        socket.broadcast.emit('audio', obj)
+      })
+
+      //receive any event
+      // socket.onAny((event, msg) => {
+      //   console.log(`Event: ${event} - Msg: ${msg}`);
+      // });
     });
 
     server.listen(PORT, () =>
