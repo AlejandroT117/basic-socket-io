@@ -5,6 +5,15 @@ const path = require("path");
 const http = require("http");
 const PORT = process.env.PORT || 4000;
 
+//Kafka proxy
+const KafkaProxy = require('kafka-proxy');
+let kafkaProxy = new KafkaProxy({
+  wsPort: 9999, 
+  kafka: 'localhost:9092/',
+  crossOriginIsolated: true
+});
+kafkaProxy.listen();
+
 const { Server } = require("socket.io");
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -34,8 +43,10 @@ const roomsList = [388, 152, 357, 206, 411, 439, 369, 339, 169];
         let number = Math.floor(Math.random() * 3);
         let roomIndex = Math.floor(Math.random() * 9);
 
-        socket.emit(`room ${roomsList[roomIndex]}`, {'FallRisk': number});
-        console.log(`room ${roomsList[roomIndex]}`, {'FallRisk': number});
+        //socket.emit(`room ${roomsList[roomIndex]}`, {'FallRisk': number});
+        socket.emit('fallRisk', {'room': roomsList[roomIndex], 'FallRisk': number})
+
+        console.log({'room': roomsList[roomIndex], 'FallRisk': number});
       }, 30000);
 
       socket.on("chat", (msg) => {
