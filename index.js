@@ -19,7 +19,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
   // options
   cors: {
-    origin: ["http://localhost:3000", 'https://marvelous-glacier-bay-34525.herokuapp.com', "https://ochsner.alejandrot.com.mx/", "http://ochsner.alejandrot.com.mx/"],
+    origin: "*",
     methods: ["GET", "POST"]
   },
 });
